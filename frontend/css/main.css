@@ -97,3 +97,29 @@
    @media (max-width: 768px) {
      section { padding: 64px 20px; }
    }
+
+
+/* Căn chỉnh khoảng cách cho item thống kê ở giữa */
+.hero-stat-border {
+  border-left: 1px solid rgba(255, 255, 255, .1);
+  border-right: 1px solid rgba(255, 255, 255, .1);
+  padding: 0 40px;
+}
+
+/* Định dạng container của phần Contact */
+.contact-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Định dạng dòng ghi chú ngày nghỉ */
+.contact-note {
+  color: rgba(255, 255, 255, .35);
+}
+
+/* Định dạng dòng bản quyền ở Footer */
+.footer-copyright {
+  color: rgba(255, 255, 255, .35);
+  font-size: 12px;
+  margin-left: 10px;
+}
