@@ -7,6 +7,7 @@
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
 }
 
 /* Container bản nhỏ hơn (Phù hợp cho các trang Đọc tin tức, Điều khoản, bảo mật...) */
@@ -17,9 +18,10 @@
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+  box-sizing: border-box;
 }
 
-/* ─── 2. HỆ THỐNG CHIA CỘT ĐA NĂNG ─── */
+/* ─── 2. HỆ THỐNG CHIA CỘT ─── */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -45,6 +47,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+}
+
+/* Chia 4 cột bằng nhau */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 /* ─── 3. KHỐI NỘI DUNG CHUNG ─── */
@@ -75,6 +84,9 @@ section {
   display: flex;
   flex-direction: column;
 }
+
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
 
 /* ─── 5. PHÂN TRANG RESPONSIVE CHO CÁC KHUNG LƯỚI ─── */
 @media (max-width: 992px) {

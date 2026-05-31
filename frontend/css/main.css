@@ -59,20 +59,6 @@
     color: var(--text-on-box);
    }
 
-   .btn-primary {
-    background-color: var(--box-bg);
-    color: var(--text-content);
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-   }
-
-   .btn-primary:hover {
-    background-color: var(--primary-color); 
-    color: var(--text-on-box);
-   }
-
    section { padding: 90px 30px; }
    
    .section-tag {
