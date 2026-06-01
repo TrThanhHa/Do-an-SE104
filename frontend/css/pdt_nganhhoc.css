@@ -285,7 +285,6 @@ tbody tr:hover td { background: #FAFBFF; }
 /* ---------- Progress bars ---------- */
 .progress-list { display: flex; flex-direction: column; gap: 20px; }
 
-.progress-row {}
 
 .progress-meta {
     display: flex;

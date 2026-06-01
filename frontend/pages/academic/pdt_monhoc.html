@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Môn học - Hệ thống Đăng ký Học phần</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/layout.css">
+  <link rel="stylesheet" href="../../css/button.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+  <link rel="stylesheet" href="../../css/dashboard.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/pdt_monhoc.css">
+
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar-wrapper">
+
+    <div class="sidebar-brand-box">
+      <div class="brand-icon">
+        <i class="ti ti-school"></i>
+      </div>
+      <span class="brand-name">EduFee</span>
+    </div>
+
+    <div class="sidebar-user-profile">
+      <div class="profile-avatar">B</div>
+      <div class="profile-info">
+        <div class="profile-name">Nguyễn Văn B</div>
+        <div class="profile-role">Phòng Đào tạo</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-menu sidebar-scroll">
+      <a href="#" class="menu-item">
+        <i class="ti ti-home"></i> Trang chủ
+      </a>
+      <a href="#" class="menu-item">
+        <i class="ti ti-users"></i> Sinh viên
+      </a>
+      <a href="#" class="menu-item">
+        <i class="ti ti-building-community"></i> Ngành học
+      </a>
+      <a href="#" class="menu-item active">
+        <i class="ti ti-book"></i> Môn học
+      </a>
+      <a href="#" class="menu-item">
+        <i class="ti ti-clipboard-list"></i> Đăng ký học phần
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="menu-item">
+        <i class="ti ti-lock"></i> Đổi mật khẩu
+      </a>
+      <a href="#" class="menu-item text-red">
+        <i class="ti ti-logout"></i> Đăng xuất
+      </a>
+    </div>
+
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <div class="main-content-area">
+
+    <!-- PAGE MAIN -->
+    <main class="page-main">
+
+      <!-- TABS -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('mon-hoc')">📘 Môn học</button>
+        <button class="tab-btn" onclick="switchTab('loai-mon')">📁 Loại môn học</button>
+      </div>
+
+      <!-- ======== TAB 1: MÔN HỌC ======== -->
+      <div class="tab-panel active" id="panel-mon-hoc">
+
+        <!-- KPI -->
+        <div class="kpi-grid">
+          <div class="kpi-card blue">
+            <div>
+              <p class="kpi-label">Tổng số môn học</p>
+              <h3 class="kpi-value">865</h3>
+              <p class="kpi-sub">Trong hệ thống</p>
+            </div>
+            <span class="kpi-icon">📘</span>
+          </div>
+          <div class="kpi-card green">
+            <div>
+              <p class="kpi-label">Môn học bắt buộc</p>
+              <h3 class="kpi-value">520</h3>
+              <p class="kpi-sub">Bắt buộc trong CTĐT</p>
+            </div>
+            <span class="kpi-icon">📋</span>
+          </div>
+          <div class="kpi-card orange">
+            <div>
+              <p class="kpi-label">Môn học tự chọn</p>
+              <h3 class="kpi-value">345</h3>
+              <p class="kpi-sub">Tự chọn trong CTĐT</p>
+            </div>
+            <span class="kpi-icon">📚</span>
+          </div>
+          <div class="kpi-card purple">
+            <div>
+              <p class="kpi-label">Môn có tiên quyết</p>
+              <h3 class="kpi-value">215</h3>
+              <p class="kpi-sub">Có môn học trước</p>
+            </div>
+            <span class="kpi-icon">🎓</span>
+          </div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+          <input type="text" class="wide" placeholder="Tìm theo mã môn học hoặc tên môn học…">
+          <select>
+            <option value="">Khoa phụ trách</option>
+            <option>Khoa CNTT</option>
+            <option>Khoa Hệ thống Thông tin</option>
+            <option>Khoa Kỹ thuật Phần mềm</option>
+            <option>Khoa Mạng máy tính</option>
+          </select>
+          <select>
+            <option value="">Loại môn học</option>
+            <option>Lý thuyết</option>
+            <option>Thực hành</option>
+          </select>
+          <select>
+            <option value="">Số tín chỉ</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+          <select>
+            <option value="">Trạng thái</option>
+            <option>Đang sử dụng</option>
+            <option>Ngừng sử dụng</option>
+          </select>
+          <div class="filter-actions">
+            <button class="btn btn-primary" onclick="openModal('modal-mon-hoc')">
+              <i class="ti ti-plus"></i> Thêm môn học
+            </button>
+            <button class="btn btn-outline"><i class="ti ti-upload"></i> Import</button>
+            <button class="btn btn-outline"><i class="ti ti-download"></i> Export</button>
+            <button class="btn btn-outline"><i class="ti ti-refresh"></i></button>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">Danh sách môn học</span>
+            <span class="table-count">Tổng cộng 865 môn học</span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Mã môn học</th>
+                  <th>Tên môn học</th>
+                  <th>Loại môn</th>
+                  <th>Khoa phụ trách</th>
+                  <th>Số TC</th>
+                  <th>Môn tiên quyết</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="code-badge">IT001</span></td>
+                  <td>Nhập môn Công nghệ Thông tin</td>
+                  <td>Đại cương</td>
+                  <td>Khoa CNTT</td>
+                  <td>3</td>
+                  <td>—</td>
+                  <td><span class="badge badge-green">Đang sử dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view" title="Xem">👁</a>
+                      <button class="action-icon edit" title="Sửa" onclick="openModal('modal-mon-hoc')">✏️</button>
+                      <button class="action-icon del" title="Xóa">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="code-badge">SE104</span></td>
+                  <td>Nhập môn Công nghệ Phần mềm</td>
+                  <td>Chuyên ngành</td>
+                  <td>Khoa CNTT</td>
+                  <td>3</td>
+                  <td><span class="code-badge">IT001</span></td>
+                  <td><span class="badge badge-green">Đang sử dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view">👁</a>
+                      <button class="action-icon edit" onclick="openModal('modal-mon-hoc')">✏️</button>
+                      <button class="action-icon del">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="code-badge">IS405</span></td>
+                  <td>Phân tích và Thiết kế Hệ thống</td>
+                  <td>Chuyên ngành</td>
+                  <td>Khoa HTTT</td>
+                  <td>4</td>
+                  <td><span class="code-badge">SE104</span></td>
+                  <td><span class="badge badge-green">Đang sử dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view">👁</a>
+                      <button class="action-icon edit" onclick="openModal('modal-mon-hoc')">✏️</button>
+                      <button class="action-icon del">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="code-badge">CS202</span></td>
+                  <td>Cấu trúc Dữ liệu và Giải thuật</td>
+                  <td>Cơ sở ngành</td>
+                  <td>Khoa CNTT</td>
+                  <td>4</td>
+                  <td><span class="code-badge">IT001</span></td>
+                  <td><span class="badge badge-green">Đang sử dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view">👁</a>
+                      <button class="action-icon edit" onclick="openModal('modal-mon-hoc')">✏️</button>
+                      <button class="action-icon del">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="code-badge">NT101</span></td>
+                  <td>Mạng máy tính</td>
+                  <td>Cơ sở ngành</td>
+                  <td>Khoa MMT</td>
+                  <td>3</td>
+                  <td>—</td>
+                  <td><span class="badge badge-orange">Ngừng sử dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view">👁</a>
+                      <button class="action-icon edit" onclick="openModal('modal-mon-hoc')">✏️</button>
+                      <button class="action-icon del">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-bar">
+            <div class="rows-select">
+              <span>Hiển thị:</span>
+              <select><option>10</option><option>20</option><option>50</option></select>
+              <span>dòng / trang</span>
+            </div>
+            <div class="page-btns">
+              <button class="page-btn arrow">← Trước</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span style="padding:0 4px;color:var(--text-muted);align-self:center">…</span>
+              <button class="page-btn">87</button>
+              <button class="page-btn arrow">Sau →</button>
+            </div>
+          </div>
+        </div>
+
+        
+      </div><!-- /panel-mon-hoc -->
+
+      <!-- ======== TAB 2: LOẠI MÔN HỌC ======== -->
+      <div class="tab-panel" id="panel-loai-mon">
+
+        <!-- KPI -->
+        <div class="kpi-grid">
+          <div class="kpi-card blue">
+            <div>
+              <p class="kpi-label">Tổng loại môn học</p>
+              <h3 class="kpi-value">2</h3>
+              <p class="kpi-sub">Trong hệ thống</p>
+            </div>
+            <span class="kpi-icon">📁</span>
+          </div>
+          <div class="kpi-card green">
+            <div>
+              <p class="kpi-label">Đang áp dụng</p>
+              <h3 class="kpi-value">2</h3>
+              <p class="kpi-sub">Loại đang hoạt động</p>
+            </div>
+            <span class="kpi-icon">✅</span>
+          </div>
+          <div class="kpi-card orange">
+            <div>
+              <p class="kpi-label">Đơn giá thấp nhất</p>
+              <h3 class="kpi-value" style="font-size:22px;">27.000 ₫</h3>
+              <p class="kpi-sub">Lý thuyết / tín chỉ</p>
+            </div>
+            <span class="kpi-icon">💰</span>
+          </div>
+          <div class="kpi-card red">
+            <div>
+              <p class="kpi-label">Đơn giá cao nhất</p>
+              <h3 class="kpi-value" style="font-size:22px;">37.000 ₫</h3>
+              <p class="kpi-sub">Thực hành / tín chỉ</p>
+            </div>
+            <span class="kpi-icon">💎</span>
+          </div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+          <input type="text" class="wide" placeholder="Tìm theo mã loại môn hoặc tên loại môn…">
+          <div class="filter-actions">
+            <button class="btn btn-primary" onclick="openModal('modal-loai-mon')">
+              <i class="ti ti-plus"></i> Thêm loại môn học
+            </button>
+            <button class="btn btn-outline"><i class="ti ti-download"></i> Export Excel</button>
+            <button class="btn btn-outline"><i class="ti ti-refresh"></i></button>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-card">
+          <div class="table-header">
+            <span class="table-title">Danh sách Loại môn học</span>
+            <span class="table-count">2 bản ghi</span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Mã loại môn</th>
+                  <th>Tên loại môn</th>
+                  <th>Đơn giá / tín chỉ</th>
+                  <th>Số tiết / tín chỉ</th>
+                  <th>Ngày cập nhật</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="code-badge">LT</span></td>
+                  <td>Lý thuyết</td>
+                  <td>27.000 VNĐ</td>
+                  <td>15 tiết</td>
+                  <td>01/01/2026</td>
+                  <td><span class="badge badge-blue">Đang áp dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view">👁</a>
+                      <button class="action-icon edit" onclick="openModal('modal-loai-mon')">✏️</button>
+                      <button class="action-icon del">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="code-badge">TH</span></td>
+                  <td>Thực hành</td>
+                  <td>37.000 VNĐ</td>
+                  <td>30 tiết</td>
+                  <td>01/01/2026</td>
+                  <td><span class="badge badge-green">Đang áp dụng</span></td>
+                  <td>
+                    <div class="action-group">
+                      <a href="#" class="action-icon view">👁</a>
+                      <button class="action-icon edit" onclick="openModal('modal-loai-mon')">✏️</button>
+                      <button class="action-icon del">🗑️</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Policy cards -->
+        <div class="panel">
+          <p class="panel-title">Quy định tính tín chỉ hiện hành</p>
+          <div class="policy-grid">
+
+            <div class="policy-card">
+              <div class="policy-card-header">
+                <span class="policy-card-title">Lý thuyết (LT)</span>
+                <span class="badge badge-blue">Đang áp dụng</span>
+              </div>
+              <div class="policy-row">
+                <span>Đơn giá</span>
+                <span>27.000 VNĐ / tín chỉ</span>
+              </div>
+              <div class="policy-row">
+                <span>Quy đổi</span>
+                <span>1 tín chỉ = 15 tiết</span>
+              </div>
+              <div class="formula-box">
+                <div class="formula-label">Công thức</div>
+                <div class="formula-text">Số tín chỉ = Tổng số tiết ÷ 15</div>
+              </div>
+            </div>
+
+            <div class="policy-card">
+              <div class="policy-card-header">
+                <span class="policy-card-title">Thực hành (TH)</span>
+                <span class="badge badge-green">Đang áp dụng</span>
+              </div>
+              <div class="policy-row">
+                <span>Đơn giá</span>
+                <span>37.000 VNĐ / tín chỉ</span>
+              </div>
+              <div class="policy-row">
+                <span>Quy đổi</span>
+                <span>1 tín chỉ = 30 tiết</span>
+              </div>
+              <div class="formula-box">
+                <div class="formula-label">Công thức</div>
+                <div class="formula-text">Số tín chỉ = Tổng số tiết ÷ 30</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /panel-loai-mon -->
+
+    </main>
+  </div><!-- /main-content-area -->
+
+</div><!-- /dashboard-layout -->
+
+<!-- ===================== MODAL: THÊM / SỬA MÔN HỌC ===================== -->
+<div class="modal-overlay" id="modal-mon-hoc">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Thông tin Môn học</h2>
+      <button class="modal-close" onclick="closeModal('modal-mon-hoc')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Mã môn học *</label>
+          <input type="text" class="form-input" placeholder="VD: IT001">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Số tín chỉ *</label>
+          <input type="number" class="form-input" placeholder="VD: 3" min="1" max="10">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Tên môn học *</label>
+        <input type="text" class="form-input" placeholder="VD: Nhập môn Công nghệ Thông tin">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Loại môn học *</label>
+          <select class="form-input">
+            <option value="">— Chọn loại —</option>
+            <option>Lý thuyết</option>
+            <option>Thực hành</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Khoa phụ trách *</label>
+          <select class="form-input">
+            <option value="">— Chọn khoa —</option>
+            <option>Khoa CNTT</option>
+            <option>Khoa HTTT</option>
+            <option>Khoa KTPM</option>
+            <option>Khoa MMT</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Môn tiên quyết</label>
+        <input type="text" class="form-input" placeholder="Mã môn tiên quyết (để trống nếu không có)">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Trạng thái</label>
+        <select class="form-input">
+          <option>Đang sử dụng</option>
+          <option>Ngừng sử dụng</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-mon-hoc')">Hủy</button>
+      <button class="btn btn-primary">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL: THÊM / SỬA LOẠI MÔN HỌC ===================== -->
+<div class="modal-overlay" id="modal-loai-mon">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Thông tin Loại môn học</h2>
+      <button class="modal-close" onclick="closeModal('modal-loai-mon')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Mã loại môn *</label>
+          <input type="text" class="form-input" placeholder="VD: LT">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Tên loại môn *</label>
+          <input type="text" class="form-input" placeholder="VD: Lý thuyết">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Đơn giá / tín chỉ (VNĐ) *</label>
+          <input type="number" class="form-input" placeholder="VD: 27000">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Số tiết / tín chỉ *</label>
+          <input type="number" class="form-input" placeholder="VD: 15">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('modal-loai-mon')">Hủy</button>
+      <button class="btn btn-primary">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+  /* ---------- Tab switching ---------- */
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      const panels = ['mon-hoc', 'loai-mon'];
+      btn.classList.toggle('active', panels[i] === name);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'panel-' + name);
+    });
+  }
+
+  /* ---------- Modal ---------- */
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+  // Close on backdrop click
+  document.querySelectorAll('.modal-overlay').forEach(el => {
+    el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+  });
+
+  /* ---------- Charts (Tab 1) ---------- */
+  new Chart(document.getElementById('courseTypeChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Bắt buộc', 'Tự chọn'],
+      datasets: [{
+        data: [520, 345],
+        backgroundColor: ['#4864FF', '#F59E0B'],
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      cutout: '68%',
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('facultyChart'), {
+    type: 'bar',
+    data: {
+      labels: ['CNTT', 'HTTT', 'KTPM', 'MMT'],
+      datasets: [{
+        label: 'Số môn',
+        data: [280, 190, 210, 185],
+        backgroundColor: '#4864FF',
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, grid: { color: '#F3F4F6' } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
