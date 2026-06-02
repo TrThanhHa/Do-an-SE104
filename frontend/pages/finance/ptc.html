@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFee -   Hệ thống đăng ký học phần </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ptc.css">
+</head>
+<body>
 
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="images/edufee.png" alt="EduFee Logo" class="web-logo">
+        </div>
+        
+        <ul class="menu-list">
+            <li class="menu-item active" data-target="tong-quan">
+                <a href="#tongquan"><span class="menu-icon">📊</span> Tổng quan</a>
+            </li>
+            <li class="menu-item" data-target="quan-ly-hoc-phi">
+                <a href="#hocphi"><span class="menu-icon">💳</span> Quản lý học phí</a>
+            </li>
+            <li class="menu-item" data-target="quan-ly-thanh-toan">
+                <a href="#thanhtoan"><span class="menu-icon">📝</span> Quản lý thanh toán</a>
+            </li>
+            <li class="menu-item" data-target="tiep-nhan-mien-giam">
+                <a href="#miengiam"><span class="menu-icon">🛡️</span> Tiếp nhận miễn giảm</a>
+            </li>
+            <li class="menu-item" data-target="theo-doi-no">
+                <a href="#no"><span class="menu-icon">⚠️</span> Theo dõi nợ</a>
+            </li>
+            <li class="menu-item" data-target="bao-cao-thong-ke">
+                <a href="#thongke"><span class="menu-icon">📈</span> Báo cáo thống kê</a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <a href="#" class="logout-btn">🚪 Đăng xuất</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="topbar">
+            <div class="school-logo-box">Logo trường</div>
+            
+            <div class="topbar-right">
+                <button class="circle-btn" title="Thông báo">🔔</button>
+                <button class="circle-btn" title="Tin nhắn">✉️</button>
+                <div class="user-profile-box">Tên người dùng</div>
+            </div>
+        </header>
+
+        <section class="stats-container">
+            <div class="stat-card">
+                <div class="stat-label">Tổng sinh viên</div>
+                <div class="stat-value" id="db-total-students">1.000</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Tỷ lệ sinh viên đã đóng</div>
+                <div class="stat-value" id="db-paid-rate">50%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Tổng doanh thu kỳ này</div>
+                <div class="stat-value" id="db-total-revenue">1.000</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Tổng số sinh viên nợ</div>
+                <div class="stat-value" id="db-debt-students">1.000</div>
+            </div>
+        </section>
+
+        <section class="charts-container">
+            <div class="chart-box" id="chart-revenue-container">
+                <div class="chart-placeholder-text">Biểu đồ thống kê doanh thu học phí</div>
+                </div>
+            
+            <div class="chart-box" id="chart-status-container">
+                <div class="chart-placeholder-text">Biểu đồ tỷ lệ trạng thái thanh toán</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Xử lý sự kiện click chuyển màu xanh cho các ô Menu ở Sidebar
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Bước 1: Loại bỏ class 'active' khỏi tất cả các ô hiện tại
+                menuItems.forEach(i => i.classList.remove('active'));
+                
+                // Bước 2: Thêm class 'active' vào ô vừa được người dùng click
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
