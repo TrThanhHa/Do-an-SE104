@@ -1,73 +1,49 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý đăng ký học phần và thu học phí</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/login.css"> 
-  <link rel="stylesheet" href="path/to/button.css">
-  <link rel="stylesheet" href="form.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - EduFee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
-
-
-<main class="login-wrapper">
-
-  <div class="login-card">
-    
-    <div class="login-header">
-      <div class="login-title"> ĐẠI HỌC QUỐC GIA TP.HỒ CHÍ MINH <br> TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN </div>
-      <div class="login-brand"> EduFee</div>
-    </div>
-
-    <form action="#" method="POST">
-      
-      <div class="form-group">
-        <label class="form-label" for="username">Tên đăng nhập</label>
-        <input 
-          type="text" 
-          id="username" 
-          name="username" 
-          class="form-input" 
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="password">Mật khẩu</label>
-        <input 
-          type="password" 
-          id="password" 
-          name="password" 
-          class="form-input" 
-          required
-        >
-      </div>
-
-      <div class="form-options">
-        <label class="remember-me">
-          <input type="checkbox" name="remember"> Ghi nhớ tôi
-        </label>
-        <a href="#" class="forgot-password">Quên mật khẩu?</a>
-      </div>
-
-      <button class="btn">Đăng nhập</button>
-
-    </form>
-
-  </div>
-</main>
-
-
+    <main class="login-wrapper">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-title">
+                    ĐẠI HỌC QUỐC GIA TP. HỒ CHÍ MINH <br>
+                    <strong>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN</strong>
+                </div>
+                <div class="login-brand">EduFee</div>
+            </div>
+            
+            <form action="pages/academic/pdt.html" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Nhập mã đăng nhập" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Nhập mật khẩu" required>
+                </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember"> Ghi nhớ tôi
+                    </label>
+                    <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="btn">Đăng nhập</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
