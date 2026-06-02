@@ -1,50 +1,48 @@
-/* ─── THIẾT LẬP HỆ MÀU SẮC CHỦ ĐẠO ─── */
+/* ==========================================================================
+   GLOBAL LAYOUT (Áp dụng chung cho tất cả các trang hệ thống)
+   ========================================================================== */
 :root {
-    --bg-sidebar: #161925;          /* Màu nền tối của thanh Sidebar */
-    --active-blue: #3b82f6;         /* Màu xanh sáng khi chọn menu */
-    --bg-main: #f3f4f6;             /* Màu xám nhạt nền web phía sau */
+    --bg-light: #f8fafc;
     --white: #ffffff;
-    --text-dark: #1f2937;
-    --text-muted: #4b5563;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
     --border-color: #e5e7eb;
+    --active-blue: #0056b3;
+    --active-light-blue: #e6f0fa;
 }
 
-/* Reset cấu hình mặc định trình duyệt */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-shadow: border-box;
     font-family: 'Roboto', sans-serif;
 }
 
 body {
     display: flex;
-    background-color: var(--bg-main);
+    background-color: var(--bg-light);
     color: var(--text-dark);
     min-height: 100vh;
 }
 
-/* ─── THIẾT KẾ SIDEBAR ─── */
+/* --- SIDEBAR --- */
 .sidebar {
-    width: 260px;
-    height: 100vh;
-    background-color: var(--bg-sidebar);
-    color: var(--white);
-    position: fixed;
-    top: 0;
-    left: 0;
+    width: 240px;
+    background-color: var(--white);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
     z-index: 100;
 }
 
-/* Khung chứa logo ở góc đen phía trên */
 .logo-container {
-    padding: 10px 24px 25px 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 24px;
+    border-bottom: 1px solid var(--border-color);
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
@@ -54,178 +52,143 @@ body {
     object-fit: contain;
 }
 
-/* Danh sách Menu */
 .menu-list {
     list-style: none;
-    padding: 20px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    padding: 24px 12px;
+    flex: 1;
+}
+
+.menu-item {
+    margin-bottom: 8px;
 }
 
 .menu-item a {
     display: flex;
     align-items: center;
-    padding: 14px 18px;
-    color: #9ca3af;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-dark);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     border-radius: 8px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease;
+}
+
+.menu-item a:hover {
+    background-color: #f1f5f9;
+}
+
+.menu-item.active a {
+    background-color: var(--active-light-blue);
+    color: var(--active-blue);
+    font-weight: 700;
 }
 
 .menu-icon {
-    margin-right: 12px;
     font-size: 16px;
 }
 
-/* Trạng thái hover và khi được chọn tô màu xanh */
-.menu-item.active a, 
-.menu-item a:hover {
-    background-color: var(--active-blue);
-    color: var(--white);
-}
-
 .sidebar-footer {
-    margin-top: auto;
-    padding: 0 14px;
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
 }
 
 .logout-btn {
-    display: block;
-    padding: 14px 18px;
-    color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    color: #dc2626;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* ─── THIẾT KẾ KHU VỰC NỘI DUNG CHÍNH (BÊN PHẢI) ─── */
-.main-content {
-    margin-left: 260px;
-    flex: 1;
-    padding: 24px 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* Thanh Topbar phía trên */
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-/* Ô chữ nhật rỗng chứa Logo trường bên trái */
-.school-logo-box {
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    padding: 10px 24px;
+    font-weight: 700;
     border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
+}
+.logout-btn:hover { background-color: #fef2f2; }
+
+/* --- MAIN CONTENT LAYOUT --- */
+.main-content {
+    flex: 1;
+    margin-left: 240px; /* Nhường chỗ cho Sidebar cố định */
+    padding: 94px 32px 32px 32px; /* Đẩy nội dung xuống dưới Topbar */
+}
+
+/* --- TOPBAR --- */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 240px;
+    right: 0;
+    height: 70px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    z-index: 90;
+}
+
+.school-logo-box {
+    font-weight: 700;
+    font-size: 14px;
     color: var(--text-muted);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .topbar-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
 }
 
-/* Các nút hình tròn cho thông báo, tin nhắn */
 .circle-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background-color: #e5e7eb;
-    border: none;
+    border: 1px solid var(--border-color);
+    background-color: var(--white);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s;
+    font-size: 14px;
 }
+.circle-btn:hover { background-color: #f8fafc; }
 
-.circle-btn:hover {
-    background-color: #d1d5db;
-}
-
-/* Ô chứa tên người dùng đăng nhập */
 .user-profile-box {
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    padding: 10px 20px;
-    border-radius: 8px;
     font-size: 13px;
     font-weight: 700;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    background-color: #f1f5f9;
+    padding: 8px 16px;
+    border-radius: 20px;
 }
 
-/* ─── HỆ THỐNG GRID 4 Ô THỐNG KÊ SỐ LIỆU ─── */
+/* --- CÁC Ô THỐNG KÊ (STATS CARDS) DÙNG CHUNG --- */
 .stats-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+    margin-bottom: 24px;
 }
 
 .stat-card {
     background-color: var(--white);
-    padding: 20px 24px;
+    padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.01);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
 }
 
 .stat-label {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--text-muted);
     font-weight: 500;
     margin-bottom: 8px;
 }
 
 .stat-value {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
-    color: #111827;
-}
-
-/* ─── KHỐI CHỨA 2 BẢNG BIỂU ĐỒ LỚN PHÍA DƯỚI ─── */
-.charts-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    flex: 1; /* Tự động co giãn lấp đầy không gian trống phía dưới */
-    min-height: 380px;
-}
-
-.chart-box {
-    background-color: var(--white);
-    border-radius: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.02);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.chart-placeholder-text {
-    font-size: 14px;
-    color: #9ca3af;
-    font-weight: 500;
-    border: 2px dashed #e5e7eb;
-    padding: 40px;
-    border-radius: 12px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
