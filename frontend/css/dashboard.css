@@ -1,4 +1,3 @@
-/* ===== LAYOUT ===== */
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
@@ -34,12 +33,10 @@
   }
 }
 
-/* ===== SPACING ===== */
 .space-y-8 > * + * { margin-top: 32px; }
 .space-y-6 > * + * { margin-top: 24px; }
 .space-y-4 > * + * { margin-top: 16px; }
 
-/* ===== GRID ===== */
 .grid-auto {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -58,7 +55,6 @@
   gap: 16px;
 }
 
-/* ===== FLEX UTILS ===== */
 .flex-between {
   display: flex;
   align-items: center;

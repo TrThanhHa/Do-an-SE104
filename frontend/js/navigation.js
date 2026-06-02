@@ -110,20 +110,20 @@ class NavigationManager {
      */
     getCurrentPageRoute() {
         const currentPath = window.location.pathname;
-
-        // Kiểm tra đường dẫn hiện tại
-        if (currentPath.includes('sinh-vien')) {
-            return 'sinh-vien';
-        } else if (currentPath.includes('nganh-hoc')) {
-            return 'nganh-hoc';
-        } else if (currentPath.includes('mon-hoc')) {
-            return 'mon-hoc';
-        } else if (currentPath.includes('dang-ky-hoc-phan')) {
-            return 'dang-ky-hoc-phan';
+       
+        // Kiểm tra chính xác theo tên file HTML thực tế của bạn
+        if (currentPath.includes('pdt_sv.html')) {
+          return 'sinh-vien';
+        } else if (currentPath.includes('pdt_nganhhoc.html')) {
+          return 'nganh-hoc';
+        } else if (currentPath.includes('pdt_monhoc.html')) {
+          return 'mon-hoc';
+        } else if (currentPath.includes('pdt_dkhp.html')) {
+          return 'dang-ky-hoc-phan';
         } else {
-            return 'trang-chu'; 
+          return 'trang-chu';
         }
-    }
+      }
 
     /**
      * Thêm tuyến đường mới (để mở rộng sau này)
