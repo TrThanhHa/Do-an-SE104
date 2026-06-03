@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển Quản trị viên - EduFee Admin</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    
+    <style>
+        .admin-layout-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+        
+        /* Form Card bên trái */
+        .admin-form-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 20px;
+        }
+        .admin-form-card h2 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bảng danh sách tài khoản bên phải */
+        .admin-list-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .admin-toolbar {
+            background-color: #ffffff;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            position: relative;
+            width: 280px;
+        }
+        .search-box input {
+            padding-left: 36px;
+        }
+        
+        /* Cấu trúc Bảng dữ liệu quản trị */
+        .table-container {
+            background-color: #ffffff;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+        .data-table thead {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            padding: 14px 18px;
+            font-weight: 600;
+            color: #495057;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-fast);
+        }
+        .data-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .data-table td {
+            padding: 14px 18px;
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+        
+        /* Badges phân vai trò người dùng (Roles) */
+        .role-badge {
+            display: inline-flex;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .role-pdt { background-color: #e7f5ff; color: var(--primary-color); }
+        .role-ptc { background-color: #e6fcf5; color: #40c057; }
+        .role-sv { background-color: #edf2ff; color: #4c6ef5; }
+        .role-admin { background-color: #f1f3f5; color: #212529; font-weight: 600; }
+        
+        /* Nhãn trạng thái tài khoản */
+        .status-dot {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13.5px;
+        }
+        .status-dot::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .status-active::before { background-color: #40c057; }
+        .status-disabled::before { background-color: var(--error-color); }
+        
+        /* Nút tác vụ nhanh */
+        .btn-action-sm {
+            padding: 6px 12px;
+            font-size: 12.5px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <aside class="app-sidebar">
+            <div class="sidebar-header">
+                <div class="btn btn-primary brand-icon" style="background-color: #212529; box-shadow: 0 4px 12px rgba(33, 37, 41, 0.3); border: none;">
+                    <i class="ti ti-shield-lock"></i>
+                </div>
+                <div class="brand-title">
+                    <h2>EduFee</h2>
+                    <span style="color: #6c757d;">Quản Trị Hệ Thống</span>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item"><a href="padmin.html"><i class="ti ti-users-group"></i> Quản lý Người dùng</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar" style="background-color: #f1f3f5; color: #212529;">ADM</div>
+                    <div class="user-info">
+                        <span class="user-name">Root Admin</span>
+                        <span class="user-role">Quản trị viên tối cao</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-logout" id="btnLogout"><i class="ti ti-logout"></i> Đăng xuất</button>
+            </div>
+        </aside>
+
+        <div class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-title">
+                    <h1>Cấu hình tài khoản người dùng & Phân quyền truy cập (RBAC)</h1>
+                </div>
+            </header>
+
+            <main class="app-content">
+                <div class="admin-layout-grid">
+                    
+                    <div class="admin-form-card">
+                        <h2><i class="ti ti-user-plus" style="color: #212529;"></i> Cấp Tài Khoản Mới</h2>
+                        <form id="userForm" onsubmit="event.preventDefault();">
+                            <div class="form-group">
+                                <label class="form-label" for="username">Tên đăng nhập (Username)</label>
+                                <input type="text" id="username" class="form-control" placeholder="Ví dụ: nvb_dao_tao" style="padding-left: 14px;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="userRole">Nhóm quyền truy cập (Role)</label>
+                                <select id="userRole" class="form-control select-control" style="padding-left: 14px;">
+                                    <option value="">-- Chọn vai trò hệ thống --</option>
+                                    <option value="PDT">Cán bộ Phòng Đào Tạo</option>
+                                    <option value="PTC">Cán bộ Phòng Tài Chính</option>
+                                    <option value="SV">Tài khoản Sinh Viên Portal</option>
+                                    <option value="ADMIN">Quản Trị Viên (Admin)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="initPassword">Mật khẩu khởi tạo</label>
+                                <input type="password" id="initPassword" class="form-control" value="12345678" style="padding-left: 14px;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" style="background-color: #212529; border: none; margin-top: 8px;">
+                                <i class="ti ti-key"></i> Tạo & Kích hoạt tài khoản
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="admin-list-wrapper">
+                        <div class="admin-toolbar">
+                            <div class="search-box">
+                                <i class="ti ti-search input-icon"></i>
+                                <input type="text" class="form-control" placeholder="Tìm tên tài khoản hoặc MSSV...">
+                            </div>
+                            <select class="form-control select-control" style="width: 180px; padding-left: 14px;">
+                                <option value="">-- Lọc theo Quyền --</option>
+                                <option value="PDT">Phòng Đào Tạo</option>
+                                <option value="PTC">Phòng Tài Chính</option>
+                                <option value="SV">Sinh Viên</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 60px;">STT</th>
+                                        <th>Tên Đăng Nhập</th>
+                                        <th>Chủ Sở Hữu</th>
+                                        <th>Nhóm Quyền</th>
+                                        <th>Trạng Thái</th>
+                                        <th style="text-align: center; width: 140px;">Hành động tác vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><strong>nvb_dao_tao</strong></td>
+                                        <td>Nguyễn Văn B</td>
+                                        <td><span class="role-badge role-pdt">Phòng Đào Tạo</span></td>
+                                        <td><span class="status-dot status-active">Hoạt động</span></td>
+                                        <td style="text-align: center;">
+                                            <button type="button" class="btn-action-sm" style="border: 1px solid var(--border-color); background: #ffffff; color: var(--error-color);">
+                                                <i class="ti ti-user-off"></i> Khóa lại
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><strong>lta_tai_chinh</strong></td>
+                                        <td>Lê Thị A</td>
+                                        <td><span class="role-badge role-ptc">Phòng Tài Chính</span></td>
+                                        <td><span class="status-dot status-active">Hoạt động</span></td>
+                                        <td style="text-align: center;">
+                                            <button type="button" class="btn-action-sm" style="border: 1px solid var(--border-color); background: #ffffff; color: var(--error-color);">
+                                                <i class="ti ti-user-off"></i> Khóa lại
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><strong>22011001</strong></td>
+                                        <td>Nguyễn Trần Anh Tuấn</td>
+                                        <td><span class="role-badge role-sv">Sinh Viên</span></td>
+                                        <td><span class="status-dot status-disabled" style="color: var(--text-muted);">Đang khóa</span></td>
+                                        <td style="text-align: center;">
+                                            <button type="button" class="btn-action-sm" style="background-color: #212529; color: #ffffff; border: none;">
+                                                <i class="ti ti-user-check"></i> Mở khóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../../js/navigation.js"></script>
+</body>
+</html>
