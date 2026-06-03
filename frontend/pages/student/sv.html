@@ -109,7 +109,7 @@
                 return;
             }
             const userData = JSON.parse(session);
-            if (userData.role !== 'STUDENT') {
+            if (userData.role !== 'SV') {
                 alert('Tài khoản của bạn không có quyền truy cập cổng Sinh viên!');
                 window.location.href = '../../index.html';
             }
