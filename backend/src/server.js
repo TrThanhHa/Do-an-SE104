@@ -2,9 +2,10 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const connectDatabase = require('./config/db.js');
+const pool = require('./config/db.js');
 const authRoutes = require('./routes/authRoutes.js');
-
+const studentRoutes = require('./routes/studentRoutes.js');
+const registrationRoutes = require('./routes/registrationRoutes');
 // 1. Khởi tạo thực thể Server Express
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,11 +15,15 @@ app.use(cors()); // Cho phép Cross-Origin Resource Sharing từ Frontend
 app.use(express.json()); // Bật tính năng phân tích dữ liệu dạng JSON gửi lên trong HTTP Body
 
 // 3. Kết nối hạ tầng Cơ sở dữ liệu
-connectDatabase();
+// Kiểm tra kết nối nhanh bằng cách query thử
+pool.query('SELECT 1')
+    .then(() => console.log('[Database] Kết nối MySQL thành công!'))
+    .catch(err => console.error('[Database] Lỗi kết nối MySQL:', err));
 
 // 4. Định tuyến các nhánh API nghiệp vụ (API Routes Binding)
 app.use('/api/auth', authRoutes);
-
+app.use('/api/students', studentRoutes);
+app.use('/api/registrations', registrationRoutes);
 // Kịch bản kiểm tra sức khỏe hệ thống (Health Check Endpoint)
 app.get('/', (req, res) => {
     res.status(200).send(`<h2 style="color: #38a169; font-family: sans-serif; text-align: center; margin-top: 50px;">EduFee Backend Server v1.0.0 đang hoạt động ổn định!</h2>`);
