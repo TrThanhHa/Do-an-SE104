@@ -9,6 +9,8 @@ const registrationRoutes = require('./routes/registrationRoutes');
 // 1. Khởi tạo thực thể Server Express
 const app = express();
 const PORT = process.env.PORT || 5000;
+const financeRoutes = require('./routes/financeRoutes.js');
+const pdtRoutes = require('./routes/pdtRoutes.js');
 
 // 2. Kích hoạt các bộ lọc trung gian hệ thống (Global Middlewares)
 app.use(cors()); // Cho phép Cross-Origin Resource Sharing từ Frontend
@@ -24,6 +26,8 @@ pool.query('SELECT 1')
 app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/registrations', registrationRoutes);
+app.use('/api/finance', financeRoutes);
+app.use('/api/academic', pdtRoutes);
 // Kịch bản kiểm tra sức khỏe hệ thống (Health Check Endpoint)
 app.get('/', (req, res) => {
     res.status(200).send(`<h2 style="color: #38a169; font-family: sans-serif; text-align: center; margin-top: 50px;">EduFee Backend Server v1.0.0 đang hoạt động ổn định!</h2>`);
