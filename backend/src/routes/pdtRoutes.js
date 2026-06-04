@@ -1,23 +1,28 @@
 const express = require('express');
 const router = express.Router();
+const pdtController = require('../controllers/pdtController');
 const protect = require('../middlewares/authMiddleware');
-// Giả định bạn sẽ tạo file pdtController sau, hoặc viết trực tiếp logic vào đây để test nhanh
-// const pdtController = require('../controllers/pdtController'); 
 
-// 1. Lấy danh sách các môn học / học phần đang mở (Cả sinh viên và PDT đều xem được)
-router.get('/courses', protect, (req, res) => {
-    res.json({ message: "API lấy danh sách học phần thành công (PDT)" });
-});
+// Ở đây bạn có thể thêm middleware check quyền (chỉ PDT mới được gọi)
+// const { authorizeRoles } = require('../middlewares/authMiddleware');
+// router.use(protect, authorizeRoles('PDT')); 
 
-// 2. Tạo một học phần/môn học mới hoặc mở lớp mới (Chỉ dành cho cán bộ PDT)
-router.post('/courses', protect, (req, res) => {
-    // Sau này check role PDT ở đây
-    res.json({ message: "API tạo học phần mới thành công" });
-});
+// Middleware protect sẽ chạy cho tất cả các route bên dưới (bắt buộc đăng nhập)
+router.use(protect);
 
-// 3. Thiết lập định mức học phí cho từng tín chỉ / ngành học
-router.post('/tuition-config', protect, (req, res) => {
-    res.json({ message: "API cấu hình định mức học phí thành công" });
-});
+// 1. Quản lý Dashboard
+router.get('/dashboard', pdtController.getDashboardStats);
+
+// 2. Quản lý Ngành học
+router.get('/majors', pdtController.getAllMajors);
+router.post('/majors', pdtController.createMajor);
+
+// 3. Quản lý Môn học
+router.get('/subjects', pdtController.getAllSubjects);
+router.post('/subjects', pdtController.createSubject);
+
+// 4. Quản lý Mở lớp học phần
+router.get('/classes', pdtController.getAllClasses);
+router.post('/classes', pdtController.createClass);
 
 module.exports = router;
