@@ -1,15 +1,14 @@
 const jwt = require('jsonwebtoken');
 
+// Middleware 1: Xác thực Token xem có hợp lệ không
 const protect = (req, res, next) => {
     let token = req.headers.authorization;
 
-    if (token && token.startsWith('Bearer')) {
+    if (token && token.startsWith('Bearer ')) { // Thêm khoảng trắng 'Bearer ' để chuẩn hóa hơn
         try {
-            // Tách lấy token từ chuỗi "Bearer <token>"
             token = token.split(' ')[1];
-            // Giải mã token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            req.user = decoded; // Gán thông tin user vào request
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'SECRET_MAC_DINH'); // Thêm fallback tránh crash nếu quên cài env
+            req.user = decoded; 
             next();
         } catch (error) {
             return res.status(401).json({ message: "Token không hợp lệ hoặc đã hết hạn!" });
@@ -19,4 +18,15 @@ const protect = (req, res, next) => {
     }
 };
 
-module.exports = protect;
+// Middleware 2 (Bổ sung thêm): Phân quyền cụ thể theo Role
+const authorize = (...allowedRoles) => {
+    return (req, res, next) => {
+        // req.user được gán từ middleware protect ở trên
+        if (!req.user || !allowedRoles.includes(req.user.role)) {
+            return res.status(403).json({ message: "Bạn không có quyền truy cập vào chức năng này!" });
+        }
+        next();
+    };
+};
+
+module.exports = { protect, authorize };
