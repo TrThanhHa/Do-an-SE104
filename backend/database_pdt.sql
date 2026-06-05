@@ -274,21 +274,25 @@ INSERT INTO MONHOC (MaMonHoc, TenMonHoc, MaKhoa, MaLoaiMonHoc, SoTiet) VALUES
 
 -- 7. Bảng CT_MONHOCTRUOC
 INSERT INTO CT_MONHOCTRUOC (MaMonHoc, MaMonHocTruoc) VALUES
-('MH03', 'MH01'); -- Muốn học Cấu trúc dữ liệu (MH03) bắt buộc phải học Nhập môn lập trình (MH01) trước
+('IT003', 'IT001'), -- Muốn học Cấu trúc dữ liệu (MH03) bắt buộc phải học Nhập môn lập trình (MH01) trước
+('IT002', 'IT001'),
+('IT003', 'IT001'),
+('IE104', 'IT001'),
+('SE104', 'IT002');
 
 -- 9. Bảng CHUONGTRINHHOC
 INSERT INTO CHUONGTRINHHOC (MaNganh, MaMonHoc, HocKy, GhiChu, KhoaApDung) VALUES
-('N01', 'MH01', 'HK1', N'Môn bắt buộc', 'Khóa 2024'),
-('N01', 'MH02', 'HK1', N'Môn bắt buộc', 'Khóa 2024'),
-('N01', 'MH03', 'HK2', N'Môn bắt buộc', 'Khóa 2024'),
-('N03', 'MH04', 'HK1', N'Môn đại chúng', 'Khóa 2024');
+('N02', 'IT001', 'HK1', N'Môn bắt buộc', 'Khóa 2024'),
+('N02', 'IT001.TH', 'HK1', N'Môn bắt buộc', 'Khóa 2024'),
+('N02', 'IT002', 'HK2', N'Môn bắt buộc', 'Khóa 2024'),
+('N07', 'SE104', 'HK1', N'Môn tự chọn', 'Khóa 2024');
 
 -- 10. Bảng SINHVIEN
 INSERT INTO SINHVIEN (MaSoSinhVien, HoTen, NgaySinh, GioiTinh, SoDienThoai, Email, MaXa, MaNganh, TinhTrang, MaDoiTuong) VALUES
-('SV001', N'Nguyễn Văn An', '2005-05-15 00:00:00', N'Nam', '0901234567', 'vanan@gmail.com', 'X01', 'N01', N'Đang học', 'DT00'),
-('SV002', N'Trần Thị Bình', '2005-10-20 00:00:00', N'Nữ', '0907654321', 'thibinh@gmail.com', 'X04', 'N01', N'Đang học', 'DT02'),
-('SV003', N'Lê Hoàng Nam', '2005-02-28 00:00:00', N'Nam', '0912345678', 'hoangnam@gmail.com', 'X05', 'N03', N'Đang học', 'DT01'),
-('SV004', N'Phạm Minh Thư', '2005-08-12 00:00:00', N'Nữ', '0988888888', 'minhthu@gmail.com', 'X02', 'N04', N'Đang học', 'DT03');
+('SV001', N'Nguyễn Văn An', '2005-05-15 00:00:00', N'Nam', '0901234567', 'vanan@gmail.com', 'X01', 'N02', N'Đang học', 'DT00'),
+('SV002', N'Trần Thị Bình', '2005-10-20 00:00:00', N'Nữ', '0907654321', 'thibinh@gmail.com', 'X04', 'N02', N'Đang học', 'DT02'),
+('SV003', N'Lê Hoàng Nam', '2005-02-28 00:00:00', N'Nam', '0912345678', 'hoangnam@gmail.com', 'X05', 'N07', N'Đang học', 'DT01'),
+('SV004', N'Phạm Minh Thư', '2005-08-12 00:00:00', N'Nữ', '0988888888', 'minhthu@gmail.com', 'X02', 'N03', N'Đang học', 'DT03');
 
 -- 11. Bảng HOCKYNAMHOC
 INSERT INTO HOCKYNAMHOC (MaHKNH, HocKy, NgayBatDau, NgayKetThuc, HanDongHocPhi) VALUES
@@ -296,38 +300,40 @@ INSERT INTO HOCKYNAMHOC (MaHKNH, HocKy, NgayBatDau, NgayKetThuc, HanDongHocPhi) 
 ('HK2-2425', N'Học kỳ 2 - Năm học 2024-2025', '2025-02-10 00:00:00', '2025-06-20 00:00:00', '2025-03-31 00:00:00');
 
 -- 12. Bảng MONHOCMO
+-- Đồng bộ mở các môn học mới: IT001, IT001.TH, IT002, SE104
 INSERT INTO MONHOCMO (MaMonHocMo, MaHKNH, MaMonHoc) VALUES
-('MHM01', 'HK1-2425', 'MH01'),
-('MHM02', 'HK1-2425', 'MH02'),
-('MHM03', 'HK1-2425', 'MH04'),
-('MHM04', 'HK2-2425', 'MH03');
+('MHM01', 'HK1-2425', 'IT001'),
+('MHM02', 'HK1-2425', 'IT001.TH'),
+('MHM03', 'HK1-2425', 'IE104'),
+('MHM04', 'HK2-2425', 'IT002');
 
 -- 13. Bảng PHIEUDANGKY
--- Tạm tính đơn giá giả định: Lý thuyết 450.000đ/Tín chỉ, Thực hành 550.000đ/Tín chỉ
--- SV001 đăng ký MH01 (3 TC LT = 1.350.000) và MH02 (2 TC TH = 1.100.000) -> Tổng 2.450.000. Không giảm.
--- SV002 đăng ký MH01 (3 TC LT = 1.350.000) và MH02 (2 TC TH = 1.100.000) -> Tổng 2.450.000. Giảm 50% = 1.225.000.
--- SV003 đăng ký MH04 (3 TC LT = 1.350.000) -> Giảm 100% = 1.350.000. Phải đóng: 0đ.
+-- Logic tính tiền dựa trên đơn giá tham số: Lý thuyết = 450.000đ/TC, Thực hành = 550.000đ/TC
+-- SV001: Đăng ký IT001 (3 TC LT = 1.350.000) và IT001.TH (1 TC TH = 550.000) -> Tổng: 1.900.000đ. Không giảm. Đóng đủ.
+-- SV002: Đăng ký IT001 (3 TC LT) + IT001.TH (1 TC TH) -> Tổng: 1.900.000đ. Giảm 50% (DT02) = 950.000đ. Còn nợ 450.000đ.
+-- SV003: Đăng ký IE104 (3 TC LT = 1.350.000đ). Giảm 100% (DT01) = 1.350.000đ. Phải đóng: 0đ.
 INSERT INTO PHIEUDANGKY (MaPhieu, MaSoSinhVien, NgayLapPhieu, MaHKNH, TongTienDK, TienMienGiam, TongTienPhaiDong, SoTienDaDong, SoTienConLai) VALUES
-('P001', 'SV001', '2024-09-10 08:30:00', 'HK1-2425', 2450000.00, 0.00, 2450000.00, 2450000.00, 0.00),
-('P002', 'SV002', '2024-09-11 09:15:00', 'HK1-2425', 2450000.00, 1225000.00, 1225000.00, 500000.00, 725000.00),
+('P001', 'SV001', '2024-09-10 08:30:00', 'HK1-2425', 1900000.00, 0.00, 1900000.00, 1900000.00, 0.00),
+('P002', 'SV002', '2024-09-11 09:15:00', 'HK1-2425', 1900000.00, 950000.00, 950000.00, 500000.00, 450000.00),
 ('P003', 'SV003', '2024-09-12 14:00:00', 'HK1-2425', 1350000.00, 1350000.00, 0.00, 0.00, 0.00);
 
 -- 14. Bảng CT_PHIEUDK
 INSERT INTO CT_PHIEUDK (MaPhieuDK, MaMonHoc) VALUES
-('P001', 'MH01'),
-('P001', 'MH02'),
-('P002', 'MH01'),
-('P002', 'MH02'),
-('P003', 'MH04');
+('P001', 'IT001'),
+('P001', 'IT001.TH'),
+('P002', 'IT001'),
+('P002', 'IT001.TH'),
+('P003', 'IE104');
 
 -- 15. Bảng PHIEUTHUHOCPHI
 INSERT INTO PHIEUTHUHOCPHI (MaPhieuThu, MaPhieuDK, NgayLapPhieu, SoTienThu) VALUES
-('PT001', 'P001', '2024-09-20 10:00:00', 2450000.00), -- SV001 đóng đủ luôn
-('PT002', 'P002', '2024-09-25 11:30:00', 500000.00);   -- SV002 mới đóng trước một phần
+('PT001', 'P001', '2024-09-20 10:00:00', 1900000.00),
+('PT002', 'P002', '2024-09-25 11:30:00', 500000.00);
 
 -- 16. Bảng BC_SVCHUAHOANTHANHHP
+-- Cập nhật số tiền nợ còn lại của SV002 là 450.000đ cho khớp logic phiếu đăng ký ở trên
 INSERT INTO BC_SVCHUAHOANTHANHHP (MaBC, MaHKNH, MaSoSinhVien, SoTienPhaiDong, SoTienConLai) VALUES
-('BC01-HK1', 'HK1-2425', 'SV002', 1225000.00, 725000.00); -- Trần Thị Bình còn nợ lại 725.000đ
+('BC01-HK1', 'HK1-2425', 'SV002', 950000.00, 450000.00);
 
 -- 17. Bảng THAMSO
 INSERT INTO THAMSO (TenThamSo, GiaTri) VALUES
@@ -358,12 +364,12 @@ INSERT INTO BANGPHANQUYEN (MaNhom, MaChucNang) VALUES
 ('SV', 'CN_SV');
 
 -- 21. Bảng NGUOIDUNG (Tài khoản hệ thống)
--- Chú ý: Tên đăng nhập được đặt theo vai trò vô cùng tường minh để bạn dễ test gõ đăng nhập
+-- Tên tài khoản ngắn gọn, mật khẩu tường minh cực kỳ dễ nhớ để test giao diện
 INSERT INTO NGUOIDUNG (TenDangNhap, MatKhau, MaNhom) VALUES
-('admin', 'admin123', 'ADMIN'),       -- Tài khoản Admin tối cao
-('daotao', 'pdt123', 'PDT'),         -- Tài khoản Phòng Đào Tạo (ví dụ cán bộ tên Nguyễn Văn Tâm)
-('taichinh', 'ptc123', 'PTC'),       -- Tài khoản Phòng Tài Chính (ví dụ cán bộ tên Lê Thị Hoa)
-('SV001', 'sv123', 'SV'),            -- Tài khoản SV Nguyễn Văn An
-('SV002', 'sv123', 'SV'),            -- Tài khoản SV Trần Thị Bình
-('SV003', 'sv123', 'SV'),            -- Tài khoản SV Lê Hoàng Nam
-('SV004', 'sv123', 'SV');            -- Tài khoản SV Phạm Minh Thư
+('admin', 'admin123', 'ADMIN'),       -- Quyền Admin hệ thống
+('daotao', 'pdt123', 'PDT'),         -- Quyền Phòng Đào Tạo
+('taichinh', 'ptc123', 'PTC'),       -- Quyền Phòng Tài Chính
+('SV001', 'sv123', 'SV'),            -- Tài khoản sinh viên Nguyễn Văn An
+('SV002', 'sv123', 'SV'),            -- Tài khoản sinh viên Trần Thị Bình
+('SV003', 'sv123', 'SV'),            -- Tài khoản sinh viên Lê Hoàng Nam
+('SV004', 'sv123', 'SV');            -- Tài khoản sinh viên Phạm Minh Thư
