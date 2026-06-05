@@ -263,14 +263,14 @@ INSERT INTO LOAIMONHOC (MaLoaiMonHoc, TenLoaiMonHoc, SoTietMotTinChi) VALUES
 
 -- 6. Bảng MONHOC
 INSERT INTO MONHOC (MaMonHoc, TenMonHoc, MaKhoa, MaLoaiMonHoc, SoTiet) VALUES
-('MH01', N'Nhập môn Lập trình', 'K01', 'LT', 45), -- 3 Tín chỉ
-('MH02', N'Thực hành Nhập môn Lập trình', 'K01', 'TH', 60), -- 2 Tín chỉ
-('MH03', N'Cấu trúc dữ liệu và Giải thuật', 'K01', 'LT', 45), -- 3 Tín chỉ
-('MH04', N'Lập trình hướng đối tượng', 'K02', 'LT', 45), -- 3 Tín chỉ
-('MH02', N'Thực hành Nhập môn Lập trình', 'K01', 'TH', 60), -- 2 Tín chỉ
-('MH03', N'Cấu trúc dữ liệu và Giải thuật', 'K01', 'LT', 45), -- 3 Tín chỉ
-('SE104', N'Nhập môn công nghệ phần mềm', 'K02', 'LT', 45), -- 3 Tín chỉ
-('IS212', N'Thực tập tốt nghiệp', 'K01', 'TH', 90); -- 3 Tín chỉ
+('IT001', N'Nhập môn Lập trình', 'KHMT', 'LT', 45), -- 3 Tín chỉ
+('IT001.TH', N'Thực hành Nhập môn Lập trình', 'KHMT', 'TH', 30), -- 1 Tín chỉ
+('IT003', N'Cấu trúc dữ liệu và Giải thuật', 'KHMT', 'LT', 45), -- 3 Tín chỉ
+('IT002', N'Lập trình hướng đối tượng', 'CNPM', 'LT', 45), -- 3 Tín chỉ
+('IT002.TH', N'Thực hành lập trình hướng đối tượng', 'CNPM', 'TH', 30), -- 1 Tín chỉ
+('IE104', N'Internet và công nghệ web', 'KTTT', 'LT', 45), -- 3 Tín chỉ
+('SE104', N'Nhập môn công nghệ phần mềm', 'KHMT', 'LT', 45), -- 3 Tín chỉ
+('IS212', N'Thực tập tốt nghiệp', 'HTTT', 'LT', 45); -- 3 Tín chỉ
 
 -- 7. Bảng CT_MONHOCTRUOC
 INSERT INTO CT_MONHOCTRUOC (MaMonHoc, MaMonHocTruoc) VALUES
